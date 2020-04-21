@@ -4,8 +4,12 @@ import React, { useContext } from "react";
 import Item from "./ShoppingCartItem";
 
 import { CartContext } from "../contexts/CartContext";
+import { ProductContext } from "../contexts/ProductContext";
 
-const ShoppingCart = () => {
+const ShoppingCart = (props) => {
+  const { removeItem } = useContext(ProductContext);
+
+  console.log("shopping cart props: ", props);
   const cart = useContext(CartContext);
   console.log({ cart });
 
@@ -20,7 +24,7 @@ const ShoppingCart = () => {
   return (
     <div className="shopping-cart">
       {cart.map((item) => (
-        <Item key={item.id} {...item} />
+        <Item key={item.id} removeItem={removeItem} {...item} />
       ))}
 
       <div className="shopping-cart__checkout">
